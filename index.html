@@ -75,14 +75,69 @@
                 <select id="name" name="name", required>
                     <option value="">選択してください</option>
                     <option value="パークタワー勝どき">パークタワー勝どき</option>
+                    <option value="ドゥ・トゥール">ドゥ・トゥール</option>
+                    <option value="ブランズタワー豊洲">ブランズタワー豊洲</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="area">部屋の広さ（m<sup>2</sup>）</label>
                 <input type="number" id="area" name="area" required>
             </div>
+            <div class="form-group">
+                <label for="balcony">バルコニーの広さ（m<sup>2</sup>）</label>
+                <input type="number" id="balcony" name="balcony" required>
+            </div>
+            <div class="form-group">
+                <label for="orientation">部屋の向き</label>
+                <select id="orientation" name="orientation", required>
+                    <option value="">選択してください</option>
+                    <option value="北">北</option>
+                    <option value="北東">北東</option>
+                    <option value="東">東</option>
+                    <option value="南東">南東</option>
+                    <option value="南">南</option>
+                    <option value="南西">南西</option>
+                    <option value="西">西</option>
+                    <option value="北西">北西</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="floors">階数</label>
+                <input type="number" id="floors" name="floors" required>
+            </div>  
         <button type="button" class="submit-btn" onclick="submitForm()">登録</button>
         </form>
+
+        <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/versions/2.22.3/sdk.js"></script>
+        <script>
+            async function submitForm() {
+                const name = document.getElementById('name').value;
+
+                const formData = {
+                    name: name,
+                };
+
+                try {
+                    await liff.init({liffId: '2006136795-72YqVOoE'});
+                    if (!liff.isLoggedIn()) {
+                        liff.login();
+                    }
+
+                    const messageToSend = `以下の情報で物件を登録します。\n名前: ${formData.name}\n`;
+
+                    liff.sendMessages([{
+                        type: 'text', 
+                        text: messageToSend
+                    }]).then(()=> {
+                        liff.closeWindow();
+                    }).catch((err) => {
+                        alert('登録に失敗しました')
+                    })
+                } catch {error} {
+                    window.alert('Error initializing LIFF:', error);
+                }
+            }
+        </script>
     </div>
 </body>
 </html>
