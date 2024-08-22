@@ -125,10 +125,28 @@
 
                     const messageToSend = `以下の情報で物件を登録します。\n名前: ${formData.name}\n`;
 
-                    liff.sendMessages([{
-                        type: 'text', 
-                        text: messageToSend
-                    }]).then(()=> {
+                    liff.sendMessages([
+                        {
+  type: 'flex',
+  altText: '宿泊検索の結果です。',
+  contents:
+  {
+    type: 'carousel',
+    contents:
+    {
+      type: 'bubble',
+      hero: ヒーローブロックのオブジェクト,
+      body: ボディブロックのオブジェクト,
+      footer: フッターブロックのオブジェクト
+    }
+  }
+}
+
+                        // {
+                        //     type: 'text', 
+                        //     text: messageToSend
+                        // }
+                    ]).then(()=> {
                         liff.closeWindow();
                     }).catch((err) => {
                         alert('登録に失敗しました')
