@@ -112,41 +112,36 @@
         <script>
             async function submitForm() {
                 const name = document.getElementById('name').value;
+                const area = document.getElementById('area').value;
+                const balcony = document.getElementById('balcony').value;
+                const orientation = document.getElementById('orientation').value;
+                const floors = document.getElementById('floors').value;
+
+                if (name == '' || !area) {
+                    alert('すべてのフィールドを入力してください');
+                    return;
+                }
 
                 const formData = {
                     name: name,
+                    area: area,
+                    balcony: balcony,
+                    orientation: orientation,
+                    floors: floors
                 };
 
                 try {
                     await liff.init({liffId: '2006136795-72YqVOoE'});
                     if (!liff.isLoggedIn()) {
                         liff.login();
-                    }
+                    };
 
                     const messageToSend = `以下の情報で物件を登録します。\n名前: ${formData.name}\n`;
 
-                    liff.sendMessages([
-                        {
-  type: 'flex',
-  altText: '宿泊検索の結果です。',
-  contents:
-  {
-    type: 'carousel',
-    contents:
-    {
-      type: 'bubble',
-      hero: ヒーローブロックのオブジェクト,
-      body: ボディブロックのオブジェクト,
-      footer: フッターブロックのオブジェクト
-    }
-  }
-}
-
-                        // {
-                        //     type: 'text', 
-                        //     text: messageToSend
-                        // }
-                    ]).then(()=> {
+                    liff.sendMessages([{
+                        type: 'text', 
+                        text: messageToSend
+                    }]).then(()=> {
                         liff.closeWindow();
                     }).catch((err) => {
                         alert('登録に失敗しました')
