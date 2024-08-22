@@ -136,13 +136,7 @@
                         liff.login();
                     };
 
-                    const messageToSend = `以下の情報で物件を登録します。
-                    名前: ${formData.name}
-                    部屋の広さ: ${formData.area}
-                    バルコニーの広さ: ${formData.balcony}
-                    部屋の向き: ${formData.orientation}
-                    階数: ${formData.floors}
-                    `;
+                    const messageToSend = `以下の情報で物件を登録します。\n名前: ${formData.name}\n部屋の広さ: ${formData.area}平米\nバルコニーの広さ: ${formData.balcony}平米\n部屋の向き: ${formData.orientation}\n階数: ${formData.floors}階`;
 
                     liff.sendMessages([{
                         type: 'text', 
