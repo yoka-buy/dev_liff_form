@@ -71,8 +71,20 @@
 
       if (isValid) {
         // 入力値が有効な場合、残りの処理を実行
-        const age = formData.get('age');
-        // ... (以下、元の処理)
+      // フォームデータから必要な値を抽出
+      const name = formData.get('name');
+      const age = formData.get('age');
+
+      // 結果を表示する要素を取得
+      const resultDiv = document.getElementById('result');
+
+      // 新しいHTML要素を作成
+      const newDiv = document.createElement('div');
+      newDiv.textContent = `入力された情報: 名前: ${name}, 年齢: ${age}`;
+
+      // 結果を表示する要素の子要素として追加
+      resultDiv.appendChild(newDiv);
+        liff.closeWindow();
       } else {
         // 入力値が無効な場合、エラーメッセージを表示など
         alert('名前は選択肢から選んでください。');
