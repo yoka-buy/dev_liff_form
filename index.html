@@ -1,1 +1,44 @@
-hello world
+<!DOCTYPE html>
+<html>
+<head>
+  <title>名前と年齢入力フォーム</title>
+</head>
+<body>
+  <form id="myForm">
+    <label for="name">名前:</label>
+    <input type="text" list="names" id="name" name="name">
+    <datalist id="names">
+      <option value="山田太郎">
+      <option value="鈴木次郎">
+      <option value="佐藤花子">
+      </datalist>
+    <br><br>
+    <label for="age">年齢:</label>
+    <input type="number" id="age" name="age"><br><br>
+    <button type="button" onclick="submitForm()">送信</button>
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    function submitForm() {
+      // フォームデータを取得
+      const formData = new FormData(document.getElementById('myForm'));
+
+      // フォームデータから必要な値を抽出
+      const name = formData.get('name');
+      const age = formData.get('age');
+
+      // 結果を表示する要素を取得
+      const resultDiv = document.getElementById('result');
+
+      // 新しいHTML要素を作成
+      const newDiv = document.createElement('div');
+      newDiv.textContent = `入力された情報: 名前: ${name}, 年齢: ${age}`;
+
+      // 結果を表示する要素の子要素として追加
+      resultDiv.appendChild(newDiv);
+    }
+  </script>
+</body>
+</html>
