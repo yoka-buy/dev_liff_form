@@ -11,7 +11,7 @@
       <option value="山田太郎">
       <option value="鈴木次郎">
       <option value="佐藤花子">
-      </datalist>
+    </datalist>
     <br><br>
     <label for="age">年齢:</label>
     <input type="number" id="age" name="age"><br><br>
@@ -25,19 +25,31 @@
       // フォームデータを取得
       const formData = new FormData(document.getElementById('myForm'));
 
-      // フォームデータから必要な値を抽出
-      const name = formData.get('name');
-      const age = formData.get('age');
+      // 入力された名前を取得
+      const selectedName = formData.get('name');
 
-      // 結果を表示する要素を取得
-      const resultDiv = document.getElementById('result');
+      // datalistのoption要素を取得
+      const options = document.getElementById('names').options;
 
-      // 新しいHTML要素を作成
-      const newDiv = document.createElement('div');
-      newDiv.textContent = `入力された情報: 名前: ${name}, 年齢: ${age}`;
+      // 入力された名前がoption要素に含まれているかチェック
+      let isValid = false;
+      for (let i = 0; i < options.length; i++) {
+        if (options[i].value === selectedName) {
+          isValid = true;
+          break;
+        }
+      }
 
-      // 結果を表示する要素の子要素として追加
-      resultDiv.appendChild(newDiv);
+      if (isValid) {
+        // 入力値が有効な場合、残りの処理を実行
+        const age = formData.get('age');
+        // ... (以下、元の処理)
+      } else {
+        // 入力値が無効な場合、エラーメッセージを表示など
+        alert('名前は選択肢から選んでください。');
+        // 入力欄のフォーカスを戻すなど
+        document.getElementById('name').focus();
+      }
     }
   </script>
 </body>
