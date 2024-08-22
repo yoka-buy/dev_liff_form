@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>名前と年齢入力フォーム</title>
+  <script charset=utf-8 src=https://static.line-scdn.net/liff/edge/2/sdk.js></script>
 </head>
 <body>
   <form id="myForm">
@@ -19,6 +20,32 @@
   </form>
 
   <div id="result"></div>
+
+  <script>
+    // LIFF初期化
+    liff.init({
+      liffId: "2006136795-72YqVOoE" // 自分のLIFF IDに置き換える
+    })
+    .then(() => {
+      // LIFF初期化成功時の処理
+      getProfile();
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+
+    function getProfile() {
+      liff.getProfile()
+      .then((profile) => {
+        // ユーザー名を表示
+        const displayName = document.createElement('div');
+        displayName.textContent = `こんにちは、${profile.displayName}さん！`;
+        document.body.insertBefore(displayName, document.getElementById('myForm'));
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+    }
 
   <script>
     function submitForm() {
